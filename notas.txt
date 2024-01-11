@@ -1,0 +1,158 @@
+Safe Area View;
+Se utiliza para asegurar que el contenido de la aplicación esté dentro de áreas seguras. Puede ser útil en dispositivos con muescas o barras de estado.
+
+import { SafeAreaView, Text } from 'react-native';
+const App = () => (
+  <SafeAreaView>
+    <Text>Contenido seguro aquí</Text>
+  </SafeAreaView>
+);
+
+
+
+
+
+
+Scroll View:
+Se utiliza para desplazar y mostrar contenido que no cabe completamente en la pantalla.
+jsx
+import { ScrollView, Text } from 'react-native';
+
+const App = () => (
+  <ScrollView>
+    <Text>Contenido que puede desplazarse</Text>
+  </ScrollView>
+);
+
+
+
+
+
+
+Stylesheet:
+se manda a llamar archivo o scrip para usar los estilo, Se utiliza para definir estilos en React Native de manera similar a CSS en la web.
+jsx
+import { StyleSheet, Text, View } from 'react-native';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+const App = () => (
+  <View style={styles.container}>
+    <Text>Estilos aplicados</Text>
+  </View>
+);
+
+
+
+
+
+Modal:
+Se utiliza para mostrar contenido superpuesto.
+jsx
+import { Modal, Text, View } from 'react-native';
+
+const App = () => (
+  <View>
+    <Modal>
+      <View>
+        <Text>Contenido del modal</Text>
+      </View>
+    </Modal>
+    <Text>Contenido principal</Text>
+  </View>
+);
+
+
+
+
+
+
+Alert:
+Se utiliza para mostrar mensajes de alerta al usuario.
+jsx
+import { Alert, Button } from 'react-native';
+
+const showAlert = () => {
+  Alert.alert('Título', 'Mensaje de alerta');
+};
+
+const App = () => (
+  <Button title="Mostrar Alerta" onPress={showAlert} />
+);
+
+
+
+
+
+Pressable:
+Se utiliza para envolver otros componentes y proporciona detección de prensa. Puede utilizarse para implementar botones y acciones interactivas.
+jsx
+import { Pressable, Text } from 'react-native';
+
+const handlePress = () => {
+  console.log('¡Presionado!');
+};
+
+const App = () => (
+  <Pressable onPress={handlePress}>
+    <Text>Presioname</Text>
+  </Pressable>
+);
+
+
+
+
+
+
+Button:
+Un componente de botón predefinido que se utiliza para capturar eventos de clic. Es una interfaz simple para que los usuarios realicen acciones.
+jsx
+import { Button, View } from 'react-native';
+
+const handlePress = () => {
+  console.log('¡Botón presionado!');
+};
+
+const App = () => (
+  <View>
+    <Button title="Presioname" onPress={handlePress} />
+  </View>
+);
+
+
+
+
+
+
+Text:
+Se utiliza para mostrar texto en la interfaz de usuario. Puede contener estilos y formato de texto.
+jsx
+import { Text, View } from 'react-native';
+
+const App = () => (
+  <View>
+    <Text>¡Hola, mundo!</Text>
+  </View>
+);
+
+
+
+
+
+
+View:
+Esencialmente un contenedor que se utiliza para agrupar otros componentes. Se utiliza para organizar y estructurar la interfaz de usuario.
+jsx
+import { View, Text } from 'react-native';
+
+const App = () => (
+  <View>
+    <Text>Contenido dentro de View</Text>
+  </View>
+);
