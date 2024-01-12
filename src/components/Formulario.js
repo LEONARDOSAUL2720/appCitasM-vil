@@ -1,4 +1,5 @@
-import React from 'react'
+import React,  { useState } from 'react'
+
 import { 
     StyleSheet,
     Text,
@@ -12,8 +13,16 @@ import {
   
   } from 'react-native';
 
- const Formulario = ({modalVisible}) => {
+  const Formulario = ({modalVisible}) => {
     
+  const {pacienteNombre, setPacienteNombre} = useState('')
+  const {pacientePropietario, setPacientePropietario} = useState('')
+  const {pacienteEmail, setPacienteEmail} = useState('')
+  const {pacienteTelefono, setPacienteTelefono} = useState('')
+  const {pacienteSintoma, setPacienteSintoma} = useState('')
+  
+
+
     return(
         <Modal animationType='slider' visible={modalVisible}>
         <SafeAreaView style ={styles.contenido}>
@@ -31,6 +40,8 @@ import {
             placeholder='Nombre Paciente'
               KeyboardType='number-pad'
               placeholderTextColor={'#000'}
+              value={pacienteNombre}
+              onChangeText={setPacienteNombre}
             />
           </View>
 
@@ -38,9 +49,11 @@ import {
             <Text style={styles.label}>Nombre del Propietario</Text>
             <TextInput 
             style={styles.input}
-            placeholder='Nombre Paciente'
+            placeholder='Nombre del Propietario'
               KeyboardType='number-pad'
               placeholderTextColor={'#666'}
+              value={pacientePropietario}
+              onChangeText={setPacientePropietario}
             />
           </View>
 
@@ -48,9 +61,11 @@ import {
             <Text style={styles.label}>Email del Propietario</Text>
             <TextInput 
             style={styles.input}
-            placeholder='Nombre Paciente'
+            placeholder='Email del Propietario'
               KeyboardType='email-pad'
               placeholderTextColor={'#666'}
+              value={pacienteEmail}
+              onChangeText={setPacienteEmail}
             />
           </View>
 
@@ -58,9 +73,11 @@ import {
             <Text style={styles.label}>Telefono del Propietario</Text>
             <TextInput 
             style={styles.input}
-            placeholder='Nombre Paciente'
+            placeholder='Telefono del Propietario'
               KeyboardType='number-pad'
               placeholderTextColor={'#666'}
+              value={pacienteTelefono}
+              onChangeText={setPacienteTelefono}
             />
           </View>
 
@@ -70,9 +87,11 @@ import {
             style={[styles.input,styles.sintomasInput]}
               placeholder='Sintomas'
               KeyboardType=''
-              placeholderTextColor={'#000'}
+              placeholderTextColor={'#666'}
               multiline={true}
               numberOfLines={4}
+              value={pacienteSintoma}
+              onChangeText={setPacienteSintoma}
             />
           </View>
 
@@ -87,7 +106,8 @@ const styles =StyleSheet.create({
   
   contenido:{
     backgroundColor:'#243f4f',
-    flex:1
+    flex:1,
+
   },
   titulo:{
     fontSize:30,
@@ -107,6 +127,7 @@ const styles =StyleSheet.create({
     marginTop:15,
     fontSize:30,
     fontWeight:'600',
+
   },
   input:{
     backgroundColor:'#e1ae6b',
@@ -117,7 +138,7 @@ const styles =StyleSheet.create({
   sintomasInput:{
    height:100,
    marginBottom:20,
-   
+
   },
   campo:{
     marginTop:40,
