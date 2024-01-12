@@ -53,7 +53,8 @@ import {
 const styles = StyleSheet.create({
   container: {
     backgroundColor:'gray', 
-    flex:1
+    flex:1,
+    marginTop:70,
   },
   titulo:{
     textAlign: 'center',
