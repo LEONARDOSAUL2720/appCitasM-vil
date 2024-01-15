@@ -9,11 +9,12 @@ import {
     Pressable,
     TextInput,
     ScrollView,
-    
+    TouchableOpacity,
+
   
   } from 'react-native';
 
-  const Formulario = ({modalVisible}) => {
+  const Formulario = ({modalVisible, setModalVisible}) => {
     
   const {pacienteNombre, setPacienteNombre} = useState('')
   const {pacientePropietario, setPacientePropietario} = useState('')
@@ -26,6 +27,12 @@ import {
     return(
         <Modal animationType='slider' visible={modalVisible}>
         <SafeAreaView style ={styles.contenido}>
+          
+       <TouchableOpacity style={styles.btnSalir} 
+       onPress={() => setModalVisible(false)}>
+        <Text style={styles.textSalir}>Salir</Text>
+        </TouchableOpacity>
+
           <ScrollView>
           <Text style={styles.titulo}
            >Nueva{''}
@@ -114,15 +121,16 @@ const styles =StyleSheet.create({
     fontWeight:'600',
     textAlign:'center',
     marginTop:30,
-    color:'ffff',
+    color:'#ffff',
 
   },
   titulo2:{
     fontWeight:'900',
+    color:'#00cc94'
 
   },
   label:{
-    color:'#ffff',
+    color:'#f5f5f5',
     marginBottom:10,
     marginTop:15,
     fontSize:30,
@@ -141,10 +149,23 @@ const styles =StyleSheet.create({
 
   },
   campo:{
-    marginTop:40,
+    marginTop:10,
     marginHorizontal:20,
     color:'e4edec',
 
+  },
+  textSalir:{
+    textAlign:'center',
+    fontSize:30,
+    color:'#00cc94',
+    backgroundColor:'#122b43',
+    borderRadius:17,
+    marginTop:20,
+    marginLeft:20,
+    marginRight:300,
+    marginBottom:5,
+    padding:'auto',
+    
   }
 })
 

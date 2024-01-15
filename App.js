@@ -9,19 +9,20 @@ import {
 
  } from 'react-native';
  import Formulario from './src/components/Formulario';
-
+ 
 
 // export default function App() {
   const App =()=>{
    
    // LOS HOKS SE COLOCAN EN LA PARTE SUPERIOR
-   const [modalVisible, setModalVisible] = useState(false) // el primer parametro es el nombre y el segundo es el nombre pero que cambia el estado de hook
-
+  const [modalVisible, setModalVisible] = useState(false) // el primer parametro es el nombre y el segundo es el nombre pero que cambia el estado de hook
+   
    return (
      // <View style={styles.container}>
      //   <Text>Bienvenido Leonardo</Text>
      //   <StatusBar style="auto" />
      // </View>
+     
      <SafeAreaView style={styles.container}>
  
  
@@ -40,35 +41,41 @@ import {
        </Modal> */}
 
        <Formulario
-       modalVisible={modalVisible} >
+       modalVisible={modalVisible}
+       setModalVisible={setModalVisible}
+        >
 
        </Formulario>
 
 
-</SafeAreaView>
+    </SafeAreaView>
   );
    
 }
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'gray', 
+    backgroundColor:'#122b43', 
     flex:1,
-    marginTop:70,
+    textAlign:'center',
+
+
   },
   titulo:{
     textAlign: 'center',
-    color:'black',
+    color:'#01bb88',
     fontSize:30,
-    fontWeight:'600'
+    fontWeight:'600',
+    marginTop: 100,
+
    
   },
   tituloBold:{
     fontWeight:'900',
-    color:'#6D28D9',
+    color:'#006e50',
   },
   btnNuevaCita:{
-    backgroundColor:'#6d28d9',
+    backgroundColor:'#006e50',
     padding:20,
     marginTop:20,
     marginHorizontal:20,
@@ -76,7 +83,7 @@ const styles = StyleSheet.create({
   },
   btnTextoNuevaCita:{
     textAlign:'center',
-    color:'#fff',
+    color:'#f5828d',
     fontSize:18,
     fontWeight:'900',
     textTransform:'uppercase',
@@ -84,9 +91,4 @@ const styles = StyleSheet.create({
   
 });
 
-export default App
-
-
-{/* <header>
-  nombreProp={Datos o funciones}
-</header> */}
+export default App;
