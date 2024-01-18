@@ -16,7 +16,7 @@ import {
    
    // LOS HOKS SE COLOCAN EN LA PARTE SUPERIOR
   const [modalVisible, setModalVisible] = useState(false) // el primer parametro es el nombre y el segundo es el nombre pero que cambia el estado de hook
-   
+  const [pacientes, setPacientes]= useState([]) 
    return (
      // <View style={styles.container}>
      //   <Text>Bienvenido Leonardo</Text>
@@ -41,8 +41,11 @@ import {
        </Modal> */}
 
        <Formulario
+      //  enviar objetos a la vista de formulario
        modalVisible={modalVisible}
        setModalVisible={setModalVisible}
+       pacientes={pacientes}
+       setPacientes={setPacientes}
         >
 
        </Formulario>

@@ -10,28 +10,79 @@ import {
     TextInput,
     ScrollView,
     TouchableOpacity,
+    Alert,
 
   
   } from 'react-native';
+  import DatePicker from '@dietime/react-native-date-picker';
 
-  const Formulario = ({modalVisible, setModalVisible}) => {
-    
-  const {pacienteNombre, setPacienteNombre} = useState('')
-  const {pacientePropietario, setPacientePropietario} = useState('')
-  const {pacienteEmail, setPacienteEmail} = useState('')
-  const {pacienteTelefono, setPacienteTelefono} = useState('')
-  const {pacienteSintoma, setPacienteSintoma} = useState('')
+  const Formulario = ({modalVisible, setModalVisible, pacientes, setPacientes}) => {
   
+    
 
+  // const [pacienteNombre, setPacienteNombre] = useState('')
+  // const {pacientePropietario, setPacientePropietario} = useState('')
+  // const {pacienteEmail, setPacienteEmail} = useState('')
+  // const {pacienteTelefono, setPacienteTelefono} = useState('')
+  // const {pacienteSintoma, setPacienteSintoma} = useState('')
+  // const [date, setDate] = useState(new Date());
+
+  const [pacienteNombre, setPacienteNombre] = useState('')
+  const [pacientePropietario, setPacientePropietario] = useState('')
+  const [pacienteEmail, setPacienteEmail] = useState('')
+  const [pacienteTelefono, setPacienteTelefono] = useState('')
+  const [pacienteSintoma, setPacienteSintoma] = useState('')
+  const [date, setDate] = useState(new Date());
+
+  const handleCita=()=>{
+    // validar 
+    if ([pacienteNombre, pacienteEmail, pacientePropietario, pacientePropietario, pacienteSintoma, date].includes('')){
+      
+      Alert.alert(
+        'Error',
+        'llena todos los campos',
+        // [{text:'Cancelar', style:'cancel'}, {text:'Ok'}]
+        
+      )
+      return
+    }
+    // objeto para enviar los datos 
+    const nuevoPaciente = {
+      pacientePropietario,
+      pacienteEmail,
+      pacienteNombre,
+      pacienteSintoma,
+      date,
+      pacienteTelefono
+    }
+    // enviamos un arreglo de los datos que se enviaron de nuestro formulario
+    setPacientes([...pacientes, nuevoPaciente])
+    setModalVisible=(!modalVisible)
+
+
+    // vaceamos los campos
+    setPacienteEmail('')
+    setPacienteNombre('')
+    setPacienteTelefono('')
+    setPacientePropietario('')
+    setPacienteSintoma('')
+    setDate(new Date())
+
+
+  }
 
     return(
         <Modal animationType='slider' visible={modalVisible}>
         <SafeAreaView style ={styles.contenido}>
           
-       <TouchableOpacity style={styles.btnSalir} 
+       {/* <TouchableOpacity style={styles.btnSalir} 
        onPress={() => setModalVisible(false)}>
         <Text style={styles.textSalir}>Salir</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <Pressable style={styles.btnSalir} 
+          onPress={() => setModalVisible(!modalVisible)}>
+        <Text style={styles.textSalir}>Salir</Text>
+        </Pressable>
 
           <ScrollView>
           <Text style={styles.titulo}
@@ -41,12 +92,12 @@ import {
           </Text>
 
           <View style={styles.campo}>
-            <Text style={styles.label}> Nombre Pacientes</Text>
+            <Text style={styles.label}> Nombre Paciente</Text>
             <TextInput 
             style={styles.input}
             placeholder='Nombre Paciente'
-              KeyboardType='number-pad'
-              placeholderTextColor={'#000'}
+              keyboardType=''
+              placeholderTextColor={'#666'}
               value={pacienteNombre}
               onChangeText={setPacienteNombre}
             />
@@ -57,7 +108,7 @@ import {
             <TextInput 
             style={styles.input}
             placeholder='Nombre del Propietario'
-              KeyboardType='number-pad'
+              keyboardType=''
               placeholderTextColor={'#666'}
               value={pacientePropietario}
               onChangeText={setPacientePropietario}
@@ -69,7 +120,7 @@ import {
             <TextInput 
             style={styles.input}
             placeholder='Email del Propietario'
-              KeyboardType='email-pad'
+              keyboardType='email-address'
               placeholderTextColor={'#666'}
               value={pacienteEmail}
               onChangeText={setPacienteEmail}
@@ -81,10 +132,12 @@ import {
             <TextInput 
             style={styles.input}
             placeholder='Telefono del Propietario'
-              KeyboardType='number-pad'
+              keyboardType='number-pad'
               placeholderTextColor={'#666'}
               value={pacienteTelefono}
               onChangeText={setPacienteTelefono}
+              // Limitar a 10 caracteres
+              
             />
           </View>
 
@@ -93,7 +146,7 @@ import {
             <TextInput 
             style={[styles.input,styles.sintomasInput]}
               placeholder='Sintomas'
-              KeyboardType=''
+              keyboardType=''
               placeholderTextColor={'#666'}
               multiline={true}
               numberOfLines={4}
@@ -102,6 +155,26 @@ import {
             />
           </View>
 
+          
+          <View style={styles.campo}>
+          <Text 
+          style={styles.label}
+          >Fecha</Text>
+            
+            <DatePicker  
+                style={styles.fecha}
+                value={date}
+                onChange={(value) => setDate(value)}
+                format="mm-dd-yyyy"
+            />
+          </View>
+          
+          <Pressable style={styles.btnNuevaCita}
+          onPress={handleCita}> 
+             <Text style={styles.btnNuevaCitaTexto}
+             >Agregar</Text>
+          </Pressable>
+
           </ScrollView>
         </SafeAreaView>
         
@@ -109,7 +182,6 @@ import {
         )
 }
 const styles =StyleSheet.create({
-  
   
   contenido:{
     backgroundColor:'#243f4f',
@@ -141,7 +213,8 @@ const styles =StyleSheet.create({
     backgroundColor:'#e1ae6b',
     padding:15,
     borderRadius:15,
-    color:'fffff'
+    color:'#fffff',
+    marginBottom:20
   },
   sintomasInput:{
    height:100,
@@ -151,7 +224,7 @@ const styles =StyleSheet.create({
   campo:{
     marginTop:10,
     marginHorizontal:20,
-    color:'e4edec',
+    color:'#e4edec',
 
   },
   textSalir:{
@@ -166,7 +239,34 @@ const styles =StyleSheet.create({
     marginBottom:5,
     padding:'auto',
     
-  }
+  },
+  fecha: {
+    width: '100%',
+    height: 40,
+    borderWidth: 1,
+    borderColor: '#e4edec',
+    borderRadius: 5,
+    padding: 5,
+    backgroundColor: '#eeaa8f',
+  },
+  btnNuevaCita:{
+    marginVertical:50,
+    backgroundColor:'#122b43',
+    paddingVertical:15,
+    marginHorizontal:30,
+    borderRadius:10,
+
+  },
+  btnNuevaCitaTexto:{
+    textAlign:'center',
+    fontSize:20,
+    color:'#00cc94',
+    textTransform:'uppercase',
+    fontWeight:'900',
+    
+
+
+  },
 })
 
 export default Formulario
