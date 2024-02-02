@@ -16,7 +16,7 @@ import {
   } from 'react-native';
   import DatePicker from '@dietime/react-native-date-picker';
 
-  const Formulario = memo (({modalVisible, setModalVisible, pacientes, setPacientes, paciente, setPaciente}) => {
+  const Formulario = memo (({modalVisible, setModalVisible, pacientes, setPacientes, paciente}) => {
   
   const [pacienteNombre, setPacienteNombre] = useState('')
   const [id, setId] = useState('')
@@ -73,7 +73,7 @@ import {
       const pacientesActualizados= pacientes.map(pacienteState =>
         pacienteState.id === nuevoPaciente.id ? nuevoPaciente : pacienteState)
         setPacientes(pacientesActualizados)
-        setPaciente({})
+        // setPaciente({})
       } else {
       // nuevo registro 
       nuevoPaciente.id= Date.now()

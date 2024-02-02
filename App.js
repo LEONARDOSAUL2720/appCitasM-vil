@@ -23,6 +23,8 @@ import Paciente from './src/components/Paciente';
   const [pacientes, setPacientes]= useState([]) 
   const [paciente, setPaciente]= useState({}) 
 
+ 
+
   const pacienteEditar = id =>{
    
     const pacienteEditar= pacientes.filter(paciente => paciente.id === id)
@@ -88,6 +90,8 @@ import Paciente from './src/components/Paciente';
               setModalVisible={setModalVisible}
               pacienteEditar={pacienteEditar}
               pacienteEliminar={pacienteEliminar}
+              pacientes={pacientes}
+              paciente={paciente}
               />
               
             )
