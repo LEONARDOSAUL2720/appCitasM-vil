@@ -6,9 +6,13 @@ import {
   SafeAreaView,
   Modal, 
   Pressable,
+  FlatList,
+  Alert,
+  
 
  } from 'react-native';
  import Formulario from './src/components/Formulario';
+import Paciente from './src/components/Paciente';
  
 
 // export default function App() {
@@ -17,6 +21,38 @@ import {
    // LOS HOKS SE COLOCAN EN LA PARTE SUPERIOR
   const [modalVisible, setModalVisible] = useState(false) // el primer parametro es el nombre y el segundo es el nombre pero que cambia el estado de hook
   const [pacientes, setPacientes]= useState([]) 
+  const [paciente, setPaciente]= useState({}) 
+
+  const pacienteEditar = id =>{
+   
+    const pacienteEditar= pacientes.filter(paciente => paciente.id === id)
+    setPaciente(pacienteEditar[0])
+    
+   
+  }
+
+  const pacienteEliminar = id =>{
+    Alert.alert(
+      '¿deseas eliminar este paciente?', 'un paciente eliminado no se puede recuperar', [
+        {
+          // Botones
+          text: 'Cancelar'
+        }, 
+        {
+          text: 'si, eliminar', onPress: () =>{
+              const pacientesActualizados = pacientes.filter(
+                pacientesState => pacientesState.id !== id
+              )
+              setPacientes(pacientesActualizados)
+          }
+        }
+      ] 
+    )
+  }
+
+
+
+
    return (
      // <View style={styles.container}>
      //   <Text>Bienvenido Leonardo</Text>
@@ -35,21 +71,43 @@ import {
          <Text style={styles.btnTextoNuevaCita}
          > Nueva Cita</Text>
        </Pressable>
- 
-       {/* <Modal animationType='fade' visible={modalVisible}>
-         <Text >Desde Modal</Text>
-       </Modal> */}
+
+
+
+      {/* valida si hay pacientes enviadso desde el formulario */}
+       {pacientes.length === 0 ? <Text style={styles.noPacientes}>No hay pacientes aún</Text>
+       :<FlatList
+          style={styles.listado}
+          data={pacientes} //los datps que va bsucar
+          keyExtractor={(item) => item.id} //  el avlor que va a buscar
+          renderItem={({item})=> {
+            console.log(item) // Ddatos enviados del formulario
+            return (
+              <Paciente
+              item={item}
+              setModalVisible={setModalVisible}
+              pacienteEditar={pacienteEditar}
+              pacienteEliminar={pacienteEliminar}
+              />
+              
+            )
+          }}
+          extraData={pacientes}
+       />}
+
+
+
 
        <Formulario
       //  enviar objetos a la vista de formulario
        modalVisible={modalVisible}
        setModalVisible={setModalVisible}
        pacientes={pacientes}
+       paciente={paciente}
        setPacientes={setPacientes}
-        >
+       >
 
-       </Formulario>
-
+       /</Formulario>
 
     </SafeAreaView>
   );
@@ -63,6 +121,12 @@ const styles = StyleSheet.create({
     textAlign:'center',
 
 
+  },
+
+  listado:{
+  marginTop:50, 
+  marginHorizontal:30, 
+  
   },
   titulo:{
     textAlign: 'center',
@@ -90,6 +154,21 @@ const styles = StyleSheet.create({
     fontSize:18,
     fontWeight:'900',
     textTransform:'uppercase',
+  },
+  noPacientes:{
+    marginTop:50,
+    textAlign:'center',
+    fontSize:30,
+    fontWeight:'700',
+    color:'#e1ae6b'
+
+  },
+  siPacientes:{
+    marginTop:10,
+    textAlign:'center',
+    fontSize:30,
+    fontWeight:'700',
+    color:'#e1ae6b'
   },
   
 });
