@@ -11,7 +11,8 @@ import {
   
 
  } from 'react-native';
- import Formulario from './src/components/Formulario';
+
+import Formulario from './src/components/Formulario';
 import Paciente from './src/components/Paciente';
  
 
@@ -22,6 +23,7 @@ import Paciente from './src/components/Paciente';
   const [modalVisible, setModalVisible] = useState(false) // el primer parametro es el nombre y el segundo es el nombre pero que cambia el estado de hook
   const [pacientes, setPacientes]= useState([]) 
   const [paciente, setPaciente]= useState({}) 
+  const [modoEdicion, setModoEdicion] = useState(false);
 
  
 
@@ -29,6 +31,7 @@ import Paciente from './src/components/Paciente';
    
     const pacienteEditar= pacientes.filter(paciente => paciente.id === id)
     setPaciente(pacienteEditar[0])
+    setModoEdicion(true);
     
    
   }
@@ -52,6 +55,11 @@ import Paciente from './src/components/Paciente';
     )
   }
 
+  const abrirNuevoModal = () => {
+    setModalVisible(true);
+    setPaciente({}); // Reiniciar el estado del paciente al abrir nuevo modal
+    setModoEdicion(false); // Cambiar al modo de creación
+  };
 
 
 
@@ -69,7 +77,7 @@ import Paciente from './src/components/Paciente';
        </Text>
  
        <Pressable style={styles.btnNuevaCita}
-       onPress={ () => setModalVisible(true)} >
+       onPress={ abrirNuevoModal} >
          <Text style={styles.btnTextoNuevaCita}
          > Nueva Cita</Text>
        </Pressable>
@@ -109,6 +117,7 @@ import Paciente from './src/components/Paciente';
        pacientes={pacientes}
        paciente={paciente}
        setPacientes={setPacientes}
+       modoEdicion={modoEdicion}
        >
 
        /</Formulario>
@@ -176,5 +185,6 @@ const styles = StyleSheet.create({
   },
   
 });
+
 
 export default App;

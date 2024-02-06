@@ -14,8 +14,9 @@ import {
 
   
   } from 'react-native';
+  
   import DatePicker from '@dietime/react-native-date-picker';
-
+  
   const Formulario = memo (({modalVisible, setModalVisible, pacientes, setPacientes, paciente}) => {
   
   const [pacienteNombre, setPacienteNombre] = useState('')
@@ -43,7 +44,7 @@ import {
 
   const handleCita=()=>{
     // validar 
-    if ([pacienteNombre, pacienteEmail, pacientePropietario, pacienteSintoma, fecha].includes('')){
+    if ([pacienteNombre, pacienteEmail, pacientePropietario, pacienteSintoma].includes('')){
       
       Alert.alert(
         'Error',
@@ -55,7 +56,7 @@ import {
     }
     // objeto para enviar los datos 
     const nuevoPaciente = {
-      // id:Date.now(),
+      id:Date.now(),
       pacienteNombre,
       pacienteEmail,
       pacientePropietario,
@@ -76,7 +77,7 @@ import {
         // setPaciente({})
       } else {
       // nuevo registro 
-      nuevoPaciente.id= Date.now()
+      // nuevoPaciente.id= Date.now()
       setPacientes([...pacientes,nuevoPaciente]) // agrega nuevo paciente
 
     }
