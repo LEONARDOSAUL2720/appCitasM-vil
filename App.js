@@ -14,7 +14,7 @@ import {
 
 import Formulario from './src/components/Formulario';
 import Paciente from './src/components/Paciente';
- 
+import InformacionPaciente from './src/components/InformacionPaciente'; 
 
 // export default function App() {
   const App =()=>{
@@ -24,6 +24,8 @@ import Paciente from './src/components/Paciente';
   const [pacientes, setPacientes]= useState([]) 
   const [paciente, setPaciente]= useState({}) 
   const [modoEdicion, setModoEdicion] = useState(false);
+  const [modalPacinte, setModalPacinte] = useState(false);
+  
 
  
 
@@ -100,6 +102,9 @@ import Paciente from './src/components/Paciente';
               pacienteEliminar={pacienteEliminar}
               pacientes={pacientes}
               paciente={paciente}
+              setModalPaciente={setModalPacinte}
+              setPaciente={setPaciente}
+      
               />
               
             )
@@ -121,6 +126,18 @@ import Paciente from './src/components/Paciente';
        >
 
        /</Formulario>
+
+       <Modal 
+       visible={modalPacinte}
+       animationType='fade' 
+       
+         
+       >
+        <InformacionPaciente
+        paciente={paciente}
+        setModalPacinte={setModalPacinte}
+        />
+       </Modal>
 
     </SafeAreaView>
   );
@@ -152,7 +169,7 @@ const styles = StyleSheet.create({
   },
   tituloBold:{
     fontWeight:'900',
-    color:'#006e50',
+    color:'c',
   },
   btnNuevaCita:{
     backgroundColor:'#006e50',

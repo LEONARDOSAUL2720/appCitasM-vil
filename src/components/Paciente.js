@@ -6,7 +6,7 @@
 
     } from 'react-native'
     
-    const Paciente = ({item, setModalVisible, pacienteEditar, pacienteEliminar}) => {
+    const Paciente = ({item, setModalVisible, pacienteEditar, pacienteEliminar, setModalPaciente, setPaciente}) => {
 
         const{pacienteNombre, fecha, id}=item
 
@@ -22,6 +22,13 @@
             return nuevaFecha.toLocaleDateString('es-ES', opciones)
         }
     return (
+
+        <Pressable
+            onLongPress = { ()=> {setModalPaciente(true) 
+            setPaciente(item)}
+        }
+        
+        >
         <View style= {styles.contenedor}>
             
             <Text style= {styles.label}>Paciente</Text>
@@ -53,6 +60,7 @@
 
 
         </View>
+        </Pressable>
 
         
         
